@@ -7,9 +7,11 @@ Welcome to the complete documentation for the **Orion Rigel Financial Analysis P
 ### 🎨 **Visual Documentation & Diagrams**
 
 #### 🏗️ **Architecture & Infrastructure**
+- **[Onboarding Flow](./visuals/diagrams/onboarding_diagram_flow.png)** - Overall High Level Onboarding Flow
+- **[Sign Up -> Dashboard Access](./visuals/diagrams/sign_up_dashboard_flow.png)** - Sign Up to Dashboard Access
+- **[Api Endpoints](./visuals/diagrams/onboarding_api_endpoints_flow.png)** - Core Onboarding API endpoints
 - **[High-Level Infrastructure](./visuals/diagrams/high_level_infrastructure.pdf)** - Complete system architecture overview
 - **[Database Architecture](./visuals/architecture/orion_rigel_db_schema.pdf)** - Orion Rigel database schema design
-- **[System Components](./visuals/architecture/system_components.pdf)** - Core modules and their relationships
 
 #### 🗃️ **Database & Schemas**
 - **[Database Schemas](./visuals/database/schemas.sql)** - Complete SQL schema definitions

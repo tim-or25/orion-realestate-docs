@@ -1,10 +1,41 @@
+Detailed Flow Breakdown:
+
+# Phase 1: Account Creation
+```tsx
+User → Sign Up → Email Verification → First Login Detection
+```
+
+# Phase 2: Onboarding Flow
+
+
+```tsx
+Welcome Page → 3-Step Process:
+1. Profile Completion (Required)
+2. Subscription Selection (Required)  
+3. Data Upload (CRITICAL - Blocks Dashboard)
+```
+
+# Phase 3: Dashboard Access Control
+
+```tsx
+Dashboard Request → Guard Check → Database Verification → Access Grant/Deny
+```
+
+# Phase 4: Continuous Access
+
+```tsx
+Subsequent Logins → Quick Status Check → Direct Access (if completed)
+```
+
+
 
 Onboarding & Dashboard Access Control
+
 Overview
 Secure, server-side validation system that prevents users from accessing the dashboard until they complete data upload during onboarding. The system uses a database-first approach with clear user messaging.
 
 File Structure
-text
+```tsx
 app/
 ├── components/
 │   └── DashboardGuard.tsx      # Server-side access control
@@ -18,27 +49,34 @@ app/
             ├── status/        # GET onboarding status
             ├── step/          # POST mark step complete
             └── complete/      # POST complete onboarding
+```
+
 Key Components
-1. DashboardGuard.tsx
+# 1. DashboardGuard.tsx
+
 typescript
 'use server';
 // Server-side check before dashboard access
 // Returns: Redirect to /dashboard/welcome if no data uploaded
-2. API Endpoints
+
+# 2. API Endpoints
+
 GET /api/user/onboarding/status - Check data_uploaded status
 
 POST /api/user/onboarding/step - Mark onboarding steps
 
 POST /api/user/onboarding/complete - Finalize onboarding
 
-3. Database Schema
-sql
+# 3. Database Schema
+
+```sql
 -- Users table must have:
 data_uploaded BOOLEAN DEFAULT FALSE
 onboarding_steps_completed JSONB DEFAULT '[]'
 User Journey
 New User (No Data Uploaded)
 Signs up → Redirected to /dashboard/welcome
+```
 
 Sees "Upload data required" message
 
@@ -48,17 +86,17 @@ data_uploaded set to TRUE in database
 
 Can now access /dashboard
 
-Returning User (Data Uploaded)
+# Returning User (Data Uploaded)
 Logs in → Direct access to /dashboard
 
 No interruptions
 
-Admin User
+# Admin User
 Always has dashboard access
 
 Bypasses data_uploaded check
 
-Security Features
+# Security Features
 ✅ Server-Side Validation - No client-side bypass
 
 ✅ Database-First - Single source of truth
@@ -70,17 +108,19 @@ Security Features
 ✅ Graceful Failure - API issues redirect to welcome page
 
 Implementation Steps
-Phase 1: Basic Protection
+
+# Phase 1: Basic Protection
 Add DashboardGuard to /dashboard/page.tsx
 
 Add conditional message to welcome page
 
-Phase 2: Extended Protection (Optional)
+# Phase 2: Extended Protection (Optional)
 Add guard to other dashboard sub-pages
 
 Add client-side UI feedback in navigation
 
-Phase 3: Monitoring
+# Phase 3: Monitoring
+
 Log onboarding completion events
 
 Track dashboard access attempts
